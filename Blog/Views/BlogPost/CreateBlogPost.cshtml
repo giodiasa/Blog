@@ -11,10 +11,12 @@
         <div class="mb-3">
             <label asp-for="Title"></label>
             <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Text"></label>
             <textarea rows="5" asp-for="Text" class="form-control"></textarea>
+            <span asp-validation-for="Text" class="text-danger"></span>
         </div>
         <button type="submit" class="btn" style="width:150px;background-color:#fdc57b; color:#394a51">Add Post</button>
         <a asp-controller="BlogPost" asp-action="Index" class="btn btn-secondary" style="width:150px;background-color:#394a51; color:#fbf2d5">

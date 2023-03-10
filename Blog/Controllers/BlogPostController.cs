@@ -44,10 +44,15 @@ namespace Blog.Controllers
         [HttpPost("CreateBlogPost")]
         public IActionResult CreateBlogPost(BlogPostModel blogPost)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            blogPost.UserId = userId;
-            _blogPostService.CreateBlogPost(blogPost);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                blogPost.UserId = userId;
+                _blogPostService.CreateBlogPost(blogPost);
+                return RedirectToAction("Index");
+            }
+            return View(blogPost);
+            
         }
 
         //Update GET
@@ -70,8 +75,13 @@ namespace Blog.Controllers
         [HttpPost("UpdateBlogPost")]
         public IActionResult UpdateBlogPost(BlogPostModel blogPost)
         {
-            _blogPostService.UpdateBlogPost(blogPost);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _blogPostService.UpdateBlogPost(blogPost);
+                return RedirectToAction("Index");
+            }
+            return View(blogPost);
+            
         }
 
         // Delete GET
