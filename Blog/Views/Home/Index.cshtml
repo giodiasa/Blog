@@ -17,7 +17,7 @@
                             <h2>@Model[i].Title</h2>
                             <p style="width:40%; margin:50px auto">@Html.Raw(Model[i].Text)</p>
                             <footer class="blockquote-footer">by name</footer>
-                            <a class="btn btn-lg" asp-controller="BlogPost" asp-action="GetBlogPost" asp-route-id="@Model[i].Id" style="background-color:#fdc57b; color:#394a51; margin-top: 50px;">Edit or Delete Post</a>
+                            <a class="btn btn-lg" asp-controller="BlogPost" asp-action="GetBlogPost" asp-route-id="@Model[i].Id" style="background-color:#352f44; color:#dbd8e3; margin-top: 50px;">Edit or Delete Post</a>
                         </div>
                     }
                     else
@@ -27,7 +27,7 @@
                             <h2>@Model[i].Title</h2>
                             <p style="width:40%; margin:50px auto">@Html.Raw(Model[i].Text)</p>
                             <footer class="blockquote-footer">by name</footer>
-                            <a class="btn btn-lg" asp-controller="BlogPost" asp-action="GetBlogPost" asp-route-id="@Model[i].Id" style="background-color:#fdc57b; color:#394a51; margin-top: 50px;">Edit or Delete Post</a>
+                            <a class="btn btn-lg" asp-controller="BlogPost" asp-action="GetBlogPost" asp-route-id="@Model[i].Id" style="background-color:#352f44; color:#dbd8e3; margin-top: 50px;">Edit or Delete Post</a>
                         </div>
                     }
 
@@ -48,7 +48,7 @@
 }
 else
 {
-    <a asp-controller="BlogPost" asp-action="CreateBlogPost" class="btn" style="margin-bottom: 15px; background-color:#fdc57b">
+    <a asp-controller="BlogPost" asp-action="CreateBlogPost" class="btn" style="margin-bottom: 15px; background-color:#dbd8e3">
         <i class="bi bi-plus-circle"></i> &nbsp; Add New Post
     </a>
 }
