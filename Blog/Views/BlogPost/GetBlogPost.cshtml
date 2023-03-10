@@ -1,15 +1,19 @@
 ﻿@model Blog.Models.BlogPostModel
-
+@using Microsoft.AspNetCore.Identity;
+@using System.Security.Claims;
 <input asp-for="Id" hidden />
 <div class="card" style="margin-bottom: 20px; width:60%; ">
     <div class="card-body">
         <h5 class="card-title">@Model.Title</h5>
         <p class="card-text">@Html.Raw(Model.Text)</p>
-        <footer class="blockquote-footer">@Model.CreateDate.ToString("d") by name</footer>
+        <footer class="blockquote-footer">@Model.CreateDate.ToString("d") by @Model.Author</footer>
     </div>
 
 </div>
+@if (User != null && Model.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+{
+    <a class="btn btn-lg" asp-controller="BlogPost" asp-action="UpdateBlogPost" asp-route-id="@Model.Id" style="background-color:#2a2438; color:#dbd8e3">Edit Post</a>
+    <a class="btn btn-lg active" role="button" aria-pressed="true" asp-controller="BlogPost" asp-action="DeleteBlogPost" asp-route-id="@Model.Id" style="background-color:#5c5470; color:#dbd8e3">Delete Post</a>
+}
 
-<a class="btn btn-lg" asp-controller="BlogPost" asp-action="UpdateBlogPost" asp-route-id="@Model.Id" style="background-color:#2a2438; color:#dbd8e3">Edit Post</a>
-<a class="btn btn-lg active" role="button" aria-pressed="true" asp-controller="BlogPost" asp-action="DeleteBlogPost" asp-route-id="@Model.Id" style="background-color:#5c5470; color:#dbd8e3">Delete Post</a>
 <a class="btn btn-lg active" role="button" aria-pressed="true" asp-controller="BlogPost" asp-action="Index" style="background-color:#dbd8e3; color:#2a2438">Go Back</a>

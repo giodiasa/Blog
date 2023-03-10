@@ -16,8 +16,8 @@
                         <div class="carousel-item active">
                             <h2>@Model[i].Title</h2>
                             <p style="width:40%; margin:50px auto">@Html.Raw(Model[i].Text)</p>
-                            <footer class="blockquote-footer">by name</footer>
-                            <a class="btn btn-lg" asp-controller="BlogPost" asp-action="GetBlogPost" asp-route-id="@Model[i].Id" style="background-color:#352f44; color:#dbd8e3; margin-top: 50px;">Edit or Delete Post</a>
+                            <footer class="blockquote-footer">by @Model[i].Author</footer>
+                            <a class="btn btn-lg" asp-controller="BlogPost" asp-action="GetBlogPost" asp-route-id="@Model[i].Id" style="background-color:#352f44; color:#dbd8e3; margin-top: 50px;">Open Post</a>
                         </div>
                     }
                     else
@@ -26,8 +26,8 @@
                         <div class="carousel-item">
                             <h2>@Model[i].Title</h2>
                             <p style="width:40%; margin:50px auto">@Html.Raw(Model[i].Text)</p>
-                            <footer class="blockquote-footer">by name</footer>
-                            <a class="btn btn-lg" asp-controller="BlogPost" asp-action="GetBlogPost" asp-route-id="@Model[i].Id" style="background-color:#352f44; color:#dbd8e3; margin-top: 50px;">Edit or Delete Post</a>
+                            <footer class="blockquote-footer">by @Model[i].Author</footer>
+                            <a class="btn btn-lg" asp-controller="BlogPost" asp-action="GetBlogPost" asp-route-id="@Model[i].Id" style="background-color:#352f44; color:#dbd8e3; margin-top: 50px;">Open Post</a>
                         </div>
                     }
 

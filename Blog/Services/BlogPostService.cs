@@ -2,6 +2,7 @@
 using Blog.Entities;
 using Blog.Interfaces;
 using Blog.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Services
 {
@@ -17,12 +18,12 @@ namespace Blog.Services
 
         public List<BlogPostModel> GetAllPosts()
         {
-            return _context.BlogPosts.Select(x => _blogPostMapper.MapFromEntityToModel(x)).ToList();
+            return _context.BlogPosts.Include(x => x.User).Select(x => _blogPostMapper.MapFromEntityToModel(x)).ToList();
         }
 
         public BlogPostModel GetBlogPost(int Id)
         {
-            var entity = _context.BlogPosts.Find(Id);
+            var entity = _context.BlogPosts.Include(x=>x.User).FirstOrDefault(x => x.Id == Id);
             if (entity == null)
             {
                 return new BlogPostModel() { };

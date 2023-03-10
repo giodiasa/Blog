@@ -14,7 +14,8 @@ namespace Blog.Mapping
                 Title = source.Title,
                 Text = source.Text,
                 UserId = source.UserId,
-                CreateDate = source.CreateDate
+                CreateDate = source.CreateDate,
+                Author = source.User == null? "" : source.User.FirstName + " " + source.User.LastName
             };
         }
 

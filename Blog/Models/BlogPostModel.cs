@@ -12,5 +12,6 @@ namespace Blog.Models
         public string Text { get; set; } = string.Empty;
         public string? UserId { get; set; }
         public DateTime CreateDate { get; set; }
+        public string Author { get; set; } = string.Empty;
     }
 }

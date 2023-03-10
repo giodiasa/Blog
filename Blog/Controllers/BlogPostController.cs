@@ -1,6 +1,8 @@
 ﻿using Blog.Areas.Identity.Data;
+using Blog.Entities;
 using Blog.Interfaces;
 using Blog.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -35,6 +37,7 @@ namespace Blog.Controllers
 
         //Create GET
         [HttpGet("CreateBlogPost")]
+        [Authorize]
         public IActionResult CreateBlogPost()
         {
             return View();
@@ -42,6 +45,7 @@ namespace Blog.Controllers
 
         //Create POST
         [HttpPost("CreateBlogPost")]
+        [Authorize]
         public IActionResult CreateBlogPost(BlogPostModel blogPost)
         {
             if (ModelState.IsValid)
@@ -57,6 +61,7 @@ namespace Blog.Controllers
 
         //Update GET
         [HttpGet("UpdateBlogPost")]
+        [Authorize]
         public IActionResult UpdateBlogPost(int? Id)
         {
             if (Id is null || Id == 0)
@@ -73,8 +78,13 @@ namespace Blog.Controllers
 
         //Update POST
         [HttpPost("UpdateBlogPost")]
+        [Authorize]
         public IActionResult UpdateBlogPost(BlogPostModel blogPost)
         {
+            if (blogPost.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+            {
+                return RedirectToAction("Index");
+            }
             if (ModelState.IsValid)
             {
                 _blogPostService.UpdateBlogPost(blogPost);
@@ -86,6 +96,7 @@ namespace Blog.Controllers
 
         // Delete GET
         [HttpGet("DeleteBlogPost")]
+        [Authorize]
         public IActionResult DeleteBlogPost(int? Id)
         {
             if (Id is null || Id == 0)
@@ -102,8 +113,14 @@ namespace Blog.Controllers
 
         // Delete POST
         [HttpPost("DeleteBlogPost")]
+        [Authorize]
         public IActionResult Delete(int Id)
         {
+            var blogPost = _blogPostService.GetBlogPost(Id);
+            if (blogPost.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+            {
+                return RedirectToAction("Index");
+            }
             _blogPostService.DeleteBlogPost(Id);
             return RedirectToAction("Index");
         }
